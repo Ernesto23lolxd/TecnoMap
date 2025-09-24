@@ -1,0 +1,118 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #2F87E0 0%, #7B2FF2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: black;
+}
+
+.contenedor {
+    width: 350px;
+    padding: 2.5rem 1.5rem;
+    margin: 50px auto;
+    color: #2F87E0;
+    background: rgba(42, 42, 50, 0.95);
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+}
+
+form input {
+    width: 94%;
+    outline: none;
+    padding: .7rem;
+    border: 1px solid #2F87E0;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    background-color: #20202B;
+    color: #fff;
+    transition: border 0.2s;
+}
+form input:focus {
+    border-color: #7B2FF2;
+}
+
+label {
+    font-size: 18px;
+    float: left;
+    margin-bottom: 5px;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.button {
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 12px 0;
+    width: 100%;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+    background: linear-gradient(90deg, #2F87E0 60%, #7B2FF2 100%);
+    color: whitesmoke;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(47, 135, 224, 0.2);
+    transition: background 0.3s, color 0.3s, border 0.3s;
+}
+
+.button:hover {
+    background: transparent;
+    border: 2px solid #2F87E0;
+    color: #2F87E0;
+}
+
+.Boton_Ingresar {
+    color: #2F87E0;
+    font-size: 20px;
+}
+
+.error {
+    background-color: #7B2FF2;
+    border-radius: 8px;
+    padding: 6px 0;
+    color: #fff;
+    margin-bottom: 10px;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(123, 47, 242, 0.2);
+}
+
+.success {
+    background-color: #2F87E0;
+    border-radius: 8px;
+    padding: 6px 0;
+    color: #fff;
+    margin-bottom: 10px;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(47, 135, 224, 0.2);
+}
+
+a {
+    display: inline-block;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    background: linear-gradient(90deg, #7B2FF2 60%, #2F87E0 100%);
+    border-radius: 12px;
+    padding: 12px 32px;
+    margin: 30px 0;
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(123, 47, 242, 0.15);
+    transition: background 0.3s, color 0.3s, border 0.3s;
+}
+
+a:hover {
+    background: transparent;
+    border: 2px solid #7B2FF2;
+    color: #7B2FF2;
+}

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interior - Edificio de Sistemas (Planta Baja)</title>
+    <style>
+        body {
+            background-color: #5a0202;
+            font-family: sans-serif;
+            color: white;
+            padding: 20px;
+        }
+        .building-container {
+            max-width: 900px; 
+            margin: 40px auto;
+            border: 2px solid white;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #5a0202;
+        }
+        .floor-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            align-items: center;
+        }
+        .floor-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            gap: 30px;
+        }
+        .classroom-group {
+            display: flex;
+            gap: 10px;
+        }
+        .classroom {
+            width: 70px;
+            height: 70px;
+            border: 2px solid #5a0202;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(90, 2, 2, 0.3);
+        }
+        .classroom:hover {
+            background-color: #5a0202;
+            border-color: white;
+            transform: scale(1.05);
+        }
+        .classroom:hover .room-number {
+            color: white;
+        }
+        .room-number {
+            font-size: 0.8em;
+            font-weight: bold;
+            color: #5a0202;
+        }
+        .stairs-link { 
+            text-decoration: none; 
+            color: white; 
+        }
+        .stairs {
+            font-size: 60px;
+            line-height: 1;
+            transition: transform 0.3s, color 0.3s;
+            color: white;
+            background-color: #5a0202;
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .stairs-link:hover .stairs {
+            transform: scale(1.2);
+            background-color: white;
+            color: #5a0202;
+        }
+        .modal {
+            display: none; position: fixed; z-index: 100;
+            left: 0; top: 0; width: 100%; height: 100%;
+            overflow: auto; background-color: rgba(90, 2, 2, 0.8);
+        }
+        .modal-content {
+            background-color: white; 
+            color: #5a0202; 
+            margin: 10% auto;
+            padding: 20px; 
+            border: 2px solid #5a0202; 
+            width: 80%;
+            max-width: 600px; 
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(90, 2, 2, 0.5);
+        }
+        .close-button {
+            color: #5a0202; 
+            float: right; 
+            font-size: 28px; 
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .close-button:hover, .close-button:focus {
+            color: #8b0404; 
+            text-decoration: none; 
+            cursor: pointer;
+        }
+        .modal-content h3 { 
+            color: #5a0202; 
+            text-align: center; 
+            margin-bottom: 20px;
+            border-bottom: 2px solid #5a0202;
+            padding-bottom: 10px;
+        }
+        
+        #modal-schedule table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        #modal-schedule th, #modal-schedule td {
+            border: 1px solid #5a0202;
+            padding: 8px;
+            text-align: left;
+        }
+        #modal-schedule th {
+            background-color: #5a0202;
+            color: white;
+            font-weight: bold;
+        }
+        #modal-schedule tr:nth-child(even) {
+            background-color: rgba(90, 2, 2, 0.1);
+        }
+        #modal-schedule tr:hover {
+            background-color: rgba(90, 2, 2, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="building-container">
+        <h1>Edificio de Sistemas y Computación</h1>
+        <h2>Planta Baja</h2>
+
+        <div class="floor-layout">
+            <div class="floor-row">
+                <div class="classroom-group">
+                    <div class="classroom" onclick="showModal('SC-01')"><h3 class="room-number">SC-01</h3></div>
+                    <div class="classroom" onclick="showModal('SC-02')"><h3 class="room-number">SC-02</h3></div>
+                    <div class="classroom" onclick="showModal('SC-03')"><h3 class="room-number">SC-03</h3></div>
+                </div>
+                <a href="sistemas_planta_alta.html" class="stairs-link" title="Ir a Planta Alta"><div class="stairs">↑</div></a>
+                <div class="classroom-group">
+                    <div class="classroom" onclick="showModal('SC-04')"><h3 class="room-number">SC-04</h3></div>
+                    <div class="classroom" onclick="showModal('SC-05')"><h3 class="room-number">SC-05</h3></div>
+                    <div class="classroom" onclick="showModal('SC-06')"><h3 class="room-number">SC-06</h3></div>
+                </div>
+            </div>
+            <div class="floor-row">
+                <div class="classroom-group">
+                    <div class="classroom" onclick="showModal('SC-07')"><h3 class="room-number">SC-07</h3></div>
+                    <div class="classroom" onclick="showModal('SC-08')"><h3 class="room-number">SC-08</h3></div>
+                    <div class="classroom" onclick="showModal('SC-09')"><h3 class="room-number">SC-09</h3></div>
+                </div>
+                <div style="width: 60px;"></div> 
+                <div class="classroom-group">
+                    <div class="classroom" onclick="showModal('SC-10')"><h3 class="room-number">SC-10</h3></div>
+                    <div class="classroom" onclick="showModal('SC-11')"><h3 class="room-number">SC-11</h3></div>
+                    <div class="classroom" onclick="showModal('SC-12')"><h3 class="room-number">SC-12</h3></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h3 id="modal-room"></h3>
+            <div id="modal-schedule"></div>
+        </div>
+    </div>
+
+    <script>
+        // --- BASE DE DATOS DE HORARIOS (EXTENDIDA) ---
+        const classSchedules = {
+            'SC-01': [
+                { time: '07:00-08:00', name: 'Cálculo Diferencial', teacher: 'Dr. Juan Pérez' },
+                { time: '08:00-09:00', name: 'Cálculo Diferencial', teacher: 'Dr. Juan Pérez' },
+                { time: '09:00-10:00', name: 'Tutorías', teacher: 'Dr. Juan Pérez' },
+                { time: '10:00-11:00', name: 'Álgebra Lineal', teacher: 'M.C. Jorge Campos' },
+                { time: '11:00-12:00', name: 'Física I', teacher: 'Ing. Luis Martínez' },
+                { time: '12:00-13:00', name: 'Física I', teacher: 'Ing. Luis Martínez' },
+                { time: '13:00-14:00', name: 'Inglés V', teacher: 'Lic. Fernando Costa' },
+                { time: '14:00-15:00', name: 'Liderazgo', teacher: 'Lic. Sandra Nuñez' }
+            ],
+            'SC-02': [
+                { time: '09:00-10:00', name: 'Programación I', teacher: 'M.C. Ana García' },
+                { time: '10:00-11:00', name: 'Programación I', teacher: 'M.C. Ana García' },
+                { time: '11:00-12:00', name: 'Estructura de Datos', teacher: 'M.C. Ana García' },
+                { time: '12:00-13:00', name: 'Estructura de Datos', teacher: 'M.C. Ana García' },
+                { time: '13:00-14:00', name: 'Taller de Ética', teacher: 'Lic. Mónica Rivas' },
+                { time: '14:00-15:00', name: 'Contabilidad', teacher: 'C.P. Laura Méndez' },
+                { time: '15:00-16:00', name: 'Cultura Empresarial', teacher: 'Lic. Sandra Nuñez' },
+                { time: '16:00-17:00', name: 'Interacción Humano-Comp.', teacher: 'M.T.I. Diana Castro' }
+            ],
+            'SC-03': [
+                { time: '08:00-09:00', name: 'Circuitos Eléctricos', teacher: 'Ing. Sara Nava' },
+                { time: '09:00-10:00', name: 'Circuitos Eléctricos', teacher: 'Ing. Sara Nava' },
+                { time: '10:00-11:00', name: 'Química', teacher: 'Ing. Roberto Soto' },
+                { time: '11:00-12:00', name: 'Física General', teacher: 'Ing. Luis Martínez' },
+                { time: '12:00-13:00', name: 'Física General', teacher: 'Ing. Luis Martínez' },
+                { time: '13:00-14:00', name: 'Química', teacher: 'Ing. Roberto Soto' },
+                { time: '14:00-15:00', name: 'Ecuaciones Diferenciales', teacher: 'Dr. Elisa Vega' },
+                { time: '15:00-16:00', name: 'Ecuaciones Diferenciales', teacher: 'Dr. Elisa Vega' }
+            ],
+            'SC-04': [
+                { time: '11:00-12:00', name: 'Bases de Datos', teacher: 'M.T.I. Sofía López' },
+                { time: '12:00-13:00', name: 'Bases de Datos', teacher: 'M.T.I. Sofía López' },
+                { time: '13:00-14:00', name: 'Taller de B.D.', teacher: 'M.T.I. Sofía López' },
+                { time: '14:00-15:00', name: 'Taller de B.D.', teacher: 'M.T.I. Sofía López' },
+                { time: '15:00-16:00', name: 'Programación Web', teacher: 'Ing. Oscar Luján' },
+                { time: '16:00-17:00', name: 'Programación Web', teacher: 'Ing. Oscar Luján' },
+                { time: '17:00-18:00', name: 'Sistemas Operativos', teacher: 'M.C. Laura Vera' },
+                { time: '18:00-19:00', name: 'Taller de S.O.', teacher: 'M.C. Laura Vera' }
+            ],
+            'SC-05': [
+                { time: '13:00-14:00', name: 'Arquitectura de Comp.', teacher: 'Ing. Pablo Ríos' },
+                { time: '14:00-15:00', name: 'Arquitectura de Comp.', teacher: 'Ing. Pablo Ríos' },
+                { time: '15:00-16:00', name: 'Redes de Comp.', teacher: 'Ing. Carlos Ruíz' },
+                { time: '16:00-17:00', name: 'Redes de Comp.', teacher: 'Ing. Carlos Ruíz' },
+                { time: '17:00-18:00', name: 'Admón. de Redes', teacher: 'Ing. Carlos Ruíz' },
+                { time: '18:00-19:00', name: 'Admón. de Redes', teacher: 'Ing. Carlos Ruíz' },
+                { time: '19:00-20:00', name: 'Seguridad Informática', teacher: 'M.C. Julia Ponce' },
+                { time: '20:00-21:00', name: 'Seguridad Informática', teacher: 'M.C. Julia Ponce' }
+            ],
+            'SC-06': [
+                { time: '12:00-13:00', name: 'Inglés V', teacher: 'Lic. Fernando Costa' },
+                { time: '13:00-14:00', name: 'Inglés VI', teacher: 'Lic. Fernando Costa' },
+                { time: '14:00-15:00', name: 'Inteligencia Artificial', teacher: 'Dr. Miguel Ángel Solís' },
+                { time: '15:00-16:00', name: 'Inteligencia Artificial', teacher: 'Dr. Miguel Ángel Solís' },
+                { time: '16:00-17:00', name: 'Tópicos Avanzados', teacher: 'Dr. Miguel Ángel Solís' },
+                { time: '17:00-18:00', name: 'Matemáticas Discretas', teacher: 'Dra. Elena Torres' },
+                { time: '18:00-19:00', name: 'Matemáticas Discretas', teacher: 'Dra. Elena Torres' },
+                { time: '19:00-20:00', name: 'Tutorías', teacher: 'Dra. Elena Torres' }
+            ],
+            'SC-07': [
+                { time: '07:00-08:00', name: 'Contabilidad', teacher: 'C.P. Laura Méndez' },
+                { time: '08:00-09:00', name: 'Contabilidad', teacher: 'C.P. Laura Méndez' },
+                { time: '09:00-10:00', name: 'Cálculo Integral', teacher: 'Dr. Juan Pérez' },
+                { time: '10:00-11:00', name: 'Cálculo Integral', teacher: 'Dr. Juan Pérez' },
+                { time: '11:00-12:00', name: 'Programación Orientada a Obj.', teacher: 'M.C. Ana García' },
+                { time: '12:00-13:00', name: 'Programación Orientada a Obj.', teacher: 'M.C. Ana García' },
+                { time: '13:00-14:00', name: 'Física II', teacher: 'Ing. Luis Martínez' },
+                { time: '14:00-15:00', name: 'Física II', teacher: 'Ing. Luis Martínez' }
+            ],
+            'SC-08': [
+                { time: '07:00-08:00', name: 'Fundamentos de Inv.', teacher: 'Lic. Sandra Nuñez' },
+                { time: '08:00-09:00', name: 'Metodología', teacher: 'Lic. Sandra Nuñez' },
+                { time: '09:00-10:00', name: 'Química', teacher: 'Ing. Roberto Soto' },
+                { time: '10:00-11:00', name: 'Química', teacher: 'Ing. Roberto Soto' },
+                { time: '11:00-12:00', name: 'Programación II', teacher: 'M.C. Ana García' },
+                { time: '12:00-13:00', name: 'Programación II', teacher: 'M.C. Ana García' },
+                { time: '13:00-14:00', name: 'Circuitos Digitales', teacher: 'Ing. Sara Nava' },
+                { time: '14:00-15:00', name: 'Circuitos Digitales', teacher: 'Ing. Sara Nava' }
+            ],
+            'SC-09': [
+                { time: '09:00-10:00', name: 'Desarrollo Sustentable', teacher: 'Ing. David Mora' },
+                { time: '10:00-11:00', name: 'Desarrollo Sustentable', teacher: 'Ing. David Mora' },
+                { time: '11:00-12:00', name: 'Álgebra Lineal', teacher: 'M.C. Jorge Campos' },
+                { time: '12:00-13:00', name: 'Álgebra Lineal', teacher: 'M.C. Jorge Campos' },
+                { time: '13:00-14:00', name: 'Cálculo Vectorial', teacher: 'Dr. Elisa Vega' },
+                { time: '14:00-15:00', name: 'Cálculo Vectorial', teacher: 'Dr. Elisa Vega' },
+                { time: '15:00-16:00', name: 'Tópicos de Física', teacher: 'Ing. Luis Martínez' },
+                { time: '16:00-17:00', name: 'Tópicos de Física', teacher: 'Ing. Luis Martínez' }
+            ],
+            'SC-10': [
+                { time: '13:00-14:00', name: 'Metodología', teacher: 'Lic. Sandra Nuñez' },
+                { time: '14:00-15:00', name: 'Fundamentos de Inv.', teacher: 'Lic. Sandra Nuñez' },
+                { time: '15:00-16:00', name: 'Graficación', teacher: 'Ing. Oscar Luján' },
+                { time: '16:00-17:00', name: 'Graficación', teacher: 'Ing. Oscar Luján' },
+                { time: '17:00-18:00', name: 'Ingeniería de Software', teacher: 'M.T.I. Diana Castro' },
+                { time: '18:00-19:00', name: 'Ingeniería de Software', teacher: 'M.T.I. Diana Castro' },
+                { time: '19:00-20:00', name: 'Gestión de Proyectos', teacher: 'M.T.I. Diana Castro' },
+                { time: '20:00-21:00', name: 'Gestión de Proyectos', teacher: 'M.T.I. Diana Castro' }
+            ],
+            'SC-11': [
+                { time: '07:00-08:00', name: 'Sistemas Operativos', teacher: 'M.C. Laura Vera' },
+                { time: '08:00-09:00', name: 'Sistemas Operativos', teacher: 'M.C. Laura Vera' },
+                { time: '09:00-10:00', name: 'Taller de S.O.', teacher: 'M.C. Laura Vera' },
+                { time: '10:00-11:00', name: 'Taller de S.O.', teacher: 'M.C. Laura Vera' },
+                { time: '15:00-16:00', name: 'Taller de Ética', teacher: 'Lic. Mónica Rivas' },
+                { time: '16:00-17:00', name: 'Taller de Ética', teacher: 'Lic. Mónica Rivas' },
+                { time: '17:00-18:00', name: 'Lenguajes y Autómatas', teacher: 'Dr. Miguel Ángel Solís' },
+                { time: '18:00-19:00', name: 'Lenguajes y Autómatas', teacher: 'Dr. Miguel Ángel Solís' }
+            ],
+            'SC-12': [
+                { time: '08:00-09:00', name: 'Programación Lógica', teacher: 'M.C. Julia Ponce' },
+                { time: '09:00-10:00', name: 'Programación Lógica', teacher: 'M.C. Julia Ponce' },
+                { time: '10:00-11:00', name: 'Simulación', teacher: 'Ing. Pablo Ríos' },
+                { time: '11:00-12:00', name: 'Simulación', teacher: 'Ing. Pablo Ríos' },
+                { time: '15:00-16:00', name: 'Cultura Empresarial', teacher: 'Lic. Sandra Nuñez' },
+                { time: '16:00-17:00', name: 'Desarrollo Sustentable', teacher: 'Ing. David Mora' },
+                { time: '17:00-18:00', name: 'Desarrollo Sustentable', teacher: 'Ing. David Mora' },
+                { time: '18:00-19:00', name: 'Liderazgo', teacher: 'Lic. Mónica Rivas' }
+            ]
+        };
+
+        var modal = document.getElementById("infoModal");
+
+        function showModal(classroomId) {
+            const scheduleData = classSchedules[classroomId];
+            const scheduleContainer = document.getElementById("modal-schedule");
+            
+            document.getElementById("modal-room").innerText = `Horario del Salón ${classroomId}`;
+
+            let scheduleHtml = '<table><tr><th>Horario</th><th>Materia</th><th>Profesor</th></tr>';
+            if (scheduleData && scheduleData.length > 0) {
+                scheduleData.forEach(cls => {
+                    scheduleHtml += `<tr><td>${cls.time}</td><td>${cls.name}</td><td>${cls.teacher}</td></tr>`;
+                });
+            } else {
+                scheduleHtml += '<tr><td colspan="3">No hay clases programadas para hoy.</td></tr>';
+            }
+            scheduleHtml += '</table>';
+
+            scheduleContainer.innerHTML = scheduleHtml;
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+
+</body>
+</html>

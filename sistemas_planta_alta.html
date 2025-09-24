@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interior - Edificio de Sistemas (Planta Alta)</title>
+    <style>
+        body {
+            background-color: #5a0202;
+            font-family: sans-serif;
+            color: white;
+            padding: 20px;
+        }
+        .building-container {
+            max-width: 900px; 
+            margin: 40px auto;
+            border: 2px solid white;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #5a0202;
+        }
+        .floor-layout {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Contenedor para los salones de la derecha */
+        .classrooms-section {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+        .floor-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        .classroom-group {
+            display: flex;
+            gap: 10px;
+        }
+        .classroom {
+            width: 70px;
+            height: 70px;
+            border: 2px solid #5a0202;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(90, 2, 2, 0.3);
+        }
+        .classroom:hover {
+            background-color: #5a0202;
+            border-color: white;
+            transform: scale(1.05);
+        }
+        .classroom:hover .room-number {
+            color: white;
+        }
+        .room-number {
+            font-size: 0.8em;
+            font-weight: bold;
+            color: #5a0202;
+        }
+
+        /* --- NUEVO ESTILO: Contenedor grande para las oficinas --- */
+        .office-container {
+            width: 250px; /* Ancho del bloque grande */
+            height: 330px; /* Alto para abarcar el espacio de los salones */
+            border: 2px dashed #5a0202; /* Borde punteado para diferenciarlo */
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(90, 2, 2, 0.1);
+        }
+        .office-container h3 {
+            font-size: 1.5em;
+            color: #5a0202;
+        }
+
+        .stairs-link { 
+            text-decoration: none; 
+            color: white; 
+        }
+        .stairs {
+            font-size: 60px;
+            line-height: 1;
+            transition: transform 0.3s, color 0.3s;
+            color: white;
+            background-color: #5a0202;
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .stairs-link:hover .stairs {
+            transform: scale(1.2);
+            background-color: white;
+            color: #5a0202;
+        }
+        .modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 100; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(90, 2, 2, 0.8); 
+        }
+        .modal-content { 
+            background-color: white; 
+            color: #5a0202; 
+            margin: 10% auto; 
+            padding: 20px; 
+            border: 2px solid #5a0202; 
+            width: 80%; 
+            max-width: 600px; 
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(90, 2, 2, 0.5);
+        }
+        .close-button { 
+            color: #5a0202; 
+            float: right; 
+            font-size: 28px; 
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .close-button:hover, .close-button:focus { 
+            color: #8b0404; 
+            text-decoration: none; 
+            cursor: pointer; 
+        }
+        .modal-content h3 { 
+            color: #5a0202; 
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #5a0202;
+            padding-bottom: 10px;
+        }
+        #modal-schedule table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 15px; 
+        }
+        #modal-schedule th, #modal-schedule td { 
+            border: 1px solid #5a0202; 
+            padding: 8px; 
+            text-align: left; 
+        }
+        #modal-schedule th { 
+            background-color: #5a0202;
+            color: white;
+            font-weight: bold;
+        }
+        #modal-schedule tr:nth-child(even) {
+            background-color: rgba(90, 2, 2, 0.1);
+        }
+        #modal-schedule tr:hover {
+            background-color: rgba(90, 2, 2, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="building-container">
+        <h1>Edificio de Sistemas y Computación</h1>
+        <h2>Planta Alta</h2>
+
+        <div class="floor-layout">
+            
+            <div class="office-container">
+                <h3>Oficinas de Sistemas<br/>(Jefatura y Coordinación)</h3>
+            </div>
+
+            <a href="sistemas_interior.html" class="stairs-link" title="Ir a Planta Baja">
+                <div class="stairs">↓</div>
+            </a>
+
+            <div class="classrooms-section">
+                <div class="floor-row">
+                    <div class="classroom-group">
+                        <div class="classroom" onclick="showModal('SC-13')"><h3 class="room-number">SC-13</h3></div>
+                        <div class="classroom" onclick="showModal('SC-14')"><h3 class="room-number">SC-14</h3></div>
+                        <div class="classroom" onclick="showModal('SC-15')"><h3 class="room-number">SC-15</h3></div>
+                    </div>
+                </div>
+                <div class="floor-row">
+                     <div class="classroom-group">
+                        <div class="classroom" onclick="showModal('SC-16')"><h3 class="room-number">SC-16</h3></div>
+                        <div class="classroom" onclick="showModal('SC-17')"><h3 class="room-number">SC-17</h3></div>
+                        <div class="classroom" onclick="showModal('SC-18')"><h3 class="room-number">SC-18</h3></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h3 id="modal-room"></h3>
+            <div id="modal-schedule"></div>
+        </div>
+    </div>
+
+    <script>
+        // --- BASE DE DATOS DE HORARIOS (Planta Alta) ---
+        const classSchedules = {
+            'SC-13': [
+                { time: '07:00-09:00', name: 'Ingeniería de Software', teacher: 'M.T.I. Diana Castro' },
+                { time: '09:00-11:00', name: 'Gestión de Proyectos', teacher: 'M.T.I. Diana Castro' },
+                { time: '11:00-13:00', name: 'Programación Web', teacher: 'Ing. Oscar Luján' },
+                { time: '13:00-15:00', name: 'Taller de Inv. I', teacher: 'Dr. Elisa Vega' }
+            ],
+            'SC-14': [
+                { time: '08:00-10:00', name: 'Inteligencia Artificial', teacher: 'Dr. Miguel Ángel Solís' },
+                { time: '10:00-12:00', name: 'Tópicos Avanzados de Prog.', teacher: 'Dr. Miguel Ángel Solís' },
+                { time: '12:00-14:00', name: 'Simulación', teacher: 'Ing. Pablo Ríos' },
+                { time: '14:00-16:00', name: 'Graficación', teacher: 'Ing. Oscar Luján' }
+            ],
+            'SC-15': [
+                { time: '10:00-12:00', name: 'Lenguajes y Autómatas I', teacher: 'Dr. Miguel Ángel Solís' },
+                { time: '12:00-14:00', name: 'Lenguajes y Autómatas II', teacher: 'M.C. Julia Ponce' },
+                { time: '14:00-16:00', name: 'Seguridad Informática', teacher: 'M.C. Julia Ponce' }
+            ],
+            'SC-16': [
+                { time: '07:00-09:00', name: 'Arquitectura de Computadoras', teacher: 'Ing. Pablo Ríos' },
+                { time: '09:00-11:00', name: 'Sistemas Programables', teacher: 'Ing. Sara Nava' },
+                { time: '11:00-13:00', name: 'Taller de Inv. II', teacher: 'Dr. Elisa Vega' }
+            ],
+            'SC-17': [
+                { time: '09:00-11:00', name: 'Cómputo en la Nube', teacher: 'Ing. Oscar Luján' },
+                { time: '11:00-13:00', name: 'Sistemas Embebidos', teacher: 'Ing. Sara Nava' }
+            ],
+            'SC-18': [
+                { time: '10:00-12:00', name: 'Residencias Profesionales', teacher: 'Varios' },
+                { time: '12:00-14:00', name: 'Servicio Social', teacher: 'Varios' }
+            ]
+        };
+
+        var modal = document.getElementById("infoModal");
+
+        function showModal(classroomId) {
+            const scheduleData = classSchedules[classroomId];
+            const scheduleContainer = document.getElementById("modal-schedule");
+            document.getElementById("modal-room").innerText = `Horario del Salón ${classroomId}`;
+            let scheduleHtml = '<table><tr><th>Horario</th><th>Materia</th><th>Profesor</th></tr>';
+            if (scheduleData && scheduleData.length > 0) {
+                scheduleData.forEach(cls => {
+                    scheduleHtml += `<tr><td>${cls.time}</td><td>${cls.name}</td><td>${cls.teacher}</td></tr>`;
+                });
+            } else {
+                scheduleHtml += '<tr><td colspan="3">No hay clases programadas para hoy.</td></tr>';
+            }
+            scheduleHtml += '</table>';
+            scheduleContainer.innerHTML = scheduleHtml;
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+
+</body>
+</html>

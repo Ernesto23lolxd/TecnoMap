@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interactivo del Campus</title>
+    <style>
+        body {
+            overflow: hidden; /* Evita barras de scroll durante la animación */
+        }
+        .map-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            font-family: sans-serif;
+            transition: transform 1s ease-in-out;
+        }
+
+        /* CAMBIO AQUÍ: Corregido para moverlo un poco abajo y a la IZQUIERDA */
+        .map-container.zoom-in {
+            /* Antes: translate(5%, 15%) */
+            transform: scale(2.5) translate(-5%, 15%);
+        }
+
+        .map-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .hotspot {
+            position: absolute;
+            display: block;
+        }
+
+        .hotspot .popup-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 110%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .hotspot:hover .popup-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Mapa Interactivo del Campus</h1>
+
+    <div id="map-wrapper" class="map-container">
+        <img src="assets/croquis.png" alt="Croquis del campus universitario">
+
+        <a href="#" class="hotspot" style="top: 25%; left: 67%; width: 16%; height: 13%;">
+            <span class="popup-text">Unidad Académica de Educación a Distancia</span>
+        </a>
+        <a href="#" class="hotspot" style="top: 9%; left: 59%; width: 22%; height: 12%;">
+            <span class="popup-text">Unidad Académica de Ingenierías Eléctrica y Electrónica</span>
+        </a>
+
+        <a href="javascript:void(0);" id="sistemas-hotspot" class="hotspot" style="top: 26%; left: 44%; width: 21%; height: 9%;"> 
+            <span class="popup-text">Unidad Académica de Ingenierías en Sistemas Computacionales, TICS e Informática</span>
+        </a>
+
+        <a href="#" class="hotspot" style="top: 35%; left: 44%; width: 21%; height: 9%;">
+            <span class="popup-text">Unidad de Ingenierías Química y Bioquímica</span>
+        </a>
+        <a href="#" class="hotspot" style="top: 30%; left: 61%; width: 8%; height: 8%;">
+            <span class="popup-text">Domo (Papelería Respetuosa)</span>
+        </a>
+        <a href="#" class="hotspot" style="top: 38%; left: 64%; width: 21%; height: 9%;">
+            <span class="popup-text">Edificio Industrial</span>
+        </a>
+        <a href="#" class="hotspot" style="top: 49%; left: 59%; width: 28%; height: 9%;">
+            <span class="popup-text">Unidad de Ingenierías Mecánica y Mecatrónica</span>
+        </a>
+        <a href="#" class="hotspot" style="top: 54%; left: 26%; width: 17%; height: 20%;">
+            <span class="popup-text">Centro de Información</span>
+        </a>
+        <a href="#" class="hotspot" style="top: 19%; left: 24%; width: 17%; height: 11%;">
+            <span class="popup-text">Unidad de Investigación</span>
+        </a>
+        <a href="#" class="hotspot" style="top: 53%; left: 84%; width: 8%; height: 10%;">
+            <span class="popup-text">Laboratorio de Electrónica</span>
+        </a>
+        <a href="#" class="hotspot" style="top: 57%; left: 79%; width: 9%; height: 11%;">
+            <span class="popup-text">Laboratorio de Cómputo</span>
+        </a>
+        <a href="#" class="hotspot" style="top: 24%; left: 85%; width: 11%; height: 15%;">
+            <span class="popup-text">Cancha de futbol rápido</span>
+        </a>
+        <a href="#" class="hotspot" style="top: 49%; left: 69%; width: 11%; height: 22%;">
+            <span class="popup-text">Centro de Idiomas</span>
+        </a>
+        <a href="#" class="hotspot" style="top: 29%; left: 77%; width: 12%; height: 11%;">
+            <span class="popup-text">Laboratorio de Ingeniería Industrial</span>
+        </a>
+        <a href="#" class="hotspot" style="top: 45%; left: 90%; width: 7%; height: 10%;">
+             <span class="popup-text">Unidad de Posgrado, Investigación y Desarrollo Tecnológico</span>
+        </a>
+
+    </div>
+
+    <script>
+        const sistemasHotspot = document.getElementById('sistemas-hotspot');
+        const mapWrapper = document.getElementById('map-wrapper');
+
+        sistemasHotspot.addEventListener('click', function() {
+            mapWrapper.classList.add('zoom-in');
+
+            setTimeout(function() {
+                window.location.href = 'sistemas_interior.html';
+            }, 1200);
+        });
+    </script>
+
+</body>
+</html>
