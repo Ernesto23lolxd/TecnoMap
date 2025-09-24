@@ -1,0 +1,11 @@
+body{
+ background: linear-gradient(70deg, red, white);
+}
+h1{
+  font-family: verdana; color: red;
+  text-align: center;
+}
+h2{
+  font-family: arial; color: white;
+  text-align: center;
+}
